@@ -1,3 +1,14 @@
 .header {
     margin-top: 10px;
 }
+
+.SP {
+    color: #fff;
+    background-color: #ff7100;
+    border-color: #ff7100;
+}
+.panel-default > .panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}

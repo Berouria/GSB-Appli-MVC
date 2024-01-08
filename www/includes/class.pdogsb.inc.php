@@ -268,6 +268,40 @@ class PdoGsb
     }
 
     /**
+     * Met à jour la table ligneFraisHorsForfait
+     * Met à jour la table ligneFraisHorsForfait pour un visiteur et
+     * un mois donné en enregistrant les nouveaux montants
+     *
+     * @param String $idVisiteur ID du visiteur
+     * @param String $mois       Mois sous la forme aaaamm
+     * @param Array  $lesFraisHorsForfait   tableau associatif de clé idFraisHorfait 
+     *                                      et de valeur la quantité pour ce frais
+     *
+     * @return null
+     */
+    public function majFraisHorsForfait($idVisiteur,$lesFraisHorsForfait,$libelle,$date,$montant)
+    {
+        $lesCles = array_keys($lesFraisHorsForfait);
+        foreach ($lesCles as $unIdFraisHorsForfait) {
+            $montant = $lesFraisHorsForfait[$unIdFraisHorsForfait];
+            $requetePrepare = PdoGSB::$monPdo->prepare(
+                'UPDATE lignefraishorsforfait '
+                . 'SET lignefraishorsforfait.montant = :unMontant '
+                . 'WHERE lignefraishorsforfait.idvisiteur = :unIdVisiteur '
+                . 'AND lignefraisforfait.date = :uneDate '
+                . 'AND lignefraisforfait.libelle= :unLibelle '
+                . 'AND lignefraishorsforfait.idfraishorsforfait = :idFraisHorsForfait'
+            );
+            $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_INT);
+            $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
+            $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
+            $requetePrepare->bindParam(':uneDate', $date, PDO::PARAM_STR);
+            $requetePrepare->bindParam(':idFraisHorsForfait', $unIdFraisHorsForfait, PDO::PARAM_STR);
+            $requetePrepare->execute();
+        }
+    }
+    
+    /**
      * Met à jour le nombre de justificatifs de la table ficheFrais
      * pour le mois et le visiteur concerné
      *
@@ -454,18 +488,7 @@ class PdoGsb
         );
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->execute();
-        $lesMois = array();
-        while ($laLigne = $requetePrepare->fetch()) {
-            $mois = $laLigne['mois'];
-            $numAnnee = substr($mois, 0, 4);
-            $numMois = substr($mois, 4, 2);
-            $lesMois['$mois'] = array(
-                'mois' => $mois,
-                'numAnnee' => $numAnnee,
-                'numMois' => $numMois
-            );
-        }
-        return $lesMois;
+        return $requetePrepare->fetchAll();
     }
 
     /**

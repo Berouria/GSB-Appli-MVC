@@ -14,7 +14,7 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-<form action="index.php?uc=validerFrais&action=modifierFraisForfait" 
+<form action="index.php?uc=validerFrais&action=afficherDonneesVisiteur" 
       method="post" role="form">
 <div class="row">
 

@@ -40,7 +40,7 @@
                             <br>Valider la fiche de frais</a>
                         <a styles background color : orange
                            href="index.php?uc=suivrePaiement&action=selectionnerMois"
-                           class="btn btn-primary btn-lg" role="button">
+                           class="btn btn-primary btn-lg SP" role="button">
                             <span class="glyphicon glyphicon-list-alt"></span>
                             <br>Suivre le paiement</a>
                     </div>
