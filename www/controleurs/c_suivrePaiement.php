@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Suivre le paiement
  *
@@ -14,5 +15,14 @@
  * 
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 
-echo 'salut';
+switch ($action) {
+    case 'afficherVisiteurMois':
+        $visiteur = $pdo->getVisiteursVA();
+        $lesMois = $pdo->getMoisVA();
+        $lesClesMois[] = array_keys($lesMois);
+        $moisASelectionner = $lesClesMois[0];
+        include 'vues/v_suivrePaiement.php';
+        break;
+}
