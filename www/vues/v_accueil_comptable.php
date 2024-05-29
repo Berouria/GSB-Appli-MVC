@@ -24,9 +24,9 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
+          <div style="border-color: orangered" class="panel panel-primary">
+           <div style="background-color: orangered" class="panel-heading">
+               <h3 class="panel-title" style=border-bottom: orangered>
                     <span class="glyphicon glyphicon-bookmark"></span>
                     Navigation
                 </h3>
@@ -39,7 +39,7 @@
                             <span class="glyphicon glyphicon-pencil"></span>
                             <br>Valider la fiche de frais</a>
                         <a styles background color : orange
-                           href="index.php?uc=suivrePaiement&action=selectionnerMois"
+                           href="index.php?uc=suivrePaiement&action=afficherVisiteurMois"
                            class="btn btn-primary btn-lg SP" role="button">
                             <span class="glyphicon glyphicon-list-alt"></span>
                             <br>Suivre le paiement</a>

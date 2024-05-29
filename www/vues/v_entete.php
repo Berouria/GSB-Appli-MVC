@@ -86,27 +86,27 @@
                     </div>
                     <div class="col-md-8">
                         <ul class="nav nav-pills pull-right" role="tablist">
-                            <li <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
-                                <a href="index.php">
+                            <li style="color: orange" <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
+                                <a style="color: orange" href="index.php">
                                     <span class="glyphicon glyphicon-home"></span>
                                     Accueil
                                 </a>
                             </li>
-                            <li <?php if ($uc == 'gererFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=validerFrais&action=choisirVisiteurMois">
+                            <li <?php if ($uc == 'validerFrais') { ?>class="active"<?php } ?>>
+                                <a style="color: orange" href="index.php?uc=validerFrais&action=choisirVisiteurMois">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                     Valider la fiche de frais
                                 </a>
                             </li>
-                            <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=suivrePaiement&action=suivrePaiement">
+                            <li <?php if ($uc == 'suivrePaiement') { ?>class="active"<?php } ?>>
+                                <a style="color: orange" href="index.php?uc=suivrePaiement&action=afficherVisiteurMois">
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                     Suivre le paiement
                                 </a>
                             </li>
                             <li 
                             <?php if ($uc == 'deconnexion') { ?>class="active"<?php } ?>>
-                                <a href="index.php?uc=deconnexion&action=demandeDeconnexion">
+                                <a style="color: orange" href="index.php?uc=deconnexion&action=demandeDeconnexion">
                                     <span class="glyphicon glyphicon-log-out"></span>
                                     Déconnexion
                                 </a>

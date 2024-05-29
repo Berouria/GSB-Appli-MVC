@@ -23,6 +23,28 @@ switch ($action) {
         $lesMois = $pdo->getMoisVA();
         $lesClesMois[] = array_keys($lesMois);
         $moisASelectionner = $lesClesMois[0];
+        include 'vues/v_listeVisiteurListeMoisSP.php ';
+        break;
+    case 'suivrePaiement':
+        $idVisiteur = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING);
+        $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+        $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+        $numAnnee = substr($leMois, 0, 4);
+        $numMois = substr($leMois, 4, 2);
+        $libEtat = $lesInfosFicheFrais['libEtat'];
+        $montantValide = $lesInfosFicheFrais['montantValide'];
+        $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+        $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
+        $moisASelectionner = $leMois ;
+        $visiteurASelectionner = $idVisiteur;
         include 'vues/v_suivrePaiement.php';
+        break;
+    case 'mettreEnPaiement':
+        $idVisiteur = filter_input(INPUT_POST, 'lstVisiteur', FILTER_SANITIZE_STRING);
+        $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+        $pdo->majEtatFicheFrais($idVisiteur, $leMois, 'RB');
+        include 'vues/v_accueil_comptable.php';
         break;
 }

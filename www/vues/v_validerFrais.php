@@ -75,7 +75,7 @@
         </div>
     </div>
     <div class="row">    
-        <h2>Valider la fiche de frais</h2>
+        <h2 style="color: orangered">Valider la fiche de frais</h2>
         <h3>Eléments forfaitisés</h3>
         <div class="col-md-4">
             <fieldset>       
@@ -95,6 +95,8 @@
                     </div>
                     <?php
                 }
+                
+                
                 ?>
                 <button class="btn btn-success" type="submit">Corriger</button>
                 <button class="btn btn-danger" type="reset">Réinitialiser</button>
@@ -104,7 +106,7 @@
 
 </form>
 <br> <div class="row">
-  
+
     <div class="panel panel-info">
         <div class="panel-heading">Descriptif des éléments hors forfait</div>
         <table class="table table-bordered table-responsive">
@@ -122,39 +124,60 @@
                     $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
                     $date = $unFraisHorsForfait['date'];
                     $montant = $unFraisHorsForfait['montant'];
-                    $id = $unFraisHorsForfait['id'];
+                    $idFrais = $unFraisHorsForfait['id'];
                     ?>           
                     <tr>
-                        
-                        <form action="index.php?uc=validerFrais&action=corrigerFraisHorsForfait" 
-              method="post" role="form">
-                        <input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
-                        <input name="lstVisiteur" type="hidden" id="lstVisiteur" class="form-control" value="<?php echo $visiteurASelectionner ?>">
-                      <td> <input type="text" id="idFrais" 
-                               name="lesFrais[<?php echo $idFrais ?>]"
+
+                <form action="index.php?uc=validerFrais&action=corrigerFraisHorsForfait" 
+                      method="post" role="form">
+                    <input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
+                    <input name="lstVisiteur" type="hidden" id="lstVisiteur" class="form-control" value="<?php echo $visiteurASelectionner ?>">
+                    <td><input type="hidden" id="idFrais" 
+                               name="idFrais"
                                size="10" maxlength="5" 
+                               value="<?php echo $idFrais ?>" 
+                               class="form-control">
+                        <input type="text" id="idFrais" 
+                               name="date"
+                               size="10" maxlength="10" 
                                value="<?php echo $date ?>" 
                                class="form-control"></td>
-                        <td><input type="text" id="idFrais" 
-                               name="lesFrais[<?php echo $idFrais ?>]"
-                               size="10" maxlength="5" 
+                    <td><input type="text" id="idFrais" 
+                               name="libelle"
+                               size="10" maxlength="30" 
                                value="<?php echo $libelle ?>" 
                                class="form-control"></td> 
-                        <td><input type="text" id="idFrais" 
-                               name="lesFrais[<?php echo $idFrais ?>]"
+                    <td><input type="text" id="idFrais" 
+                               name="montant"
                                size="10" maxlength="5" 
                                value="<?php echo $montant ?>" 
                                class="form-control"></td>
-                        <td> 
-                            <button class="btn btn-success" type="submit">Corriger</button>
-                            <button class="btn btn-danger" type="reset">Réinitialiser</button>
-                        </td>
-                        </form>
-                    </tr>
-                    <?php
-                }
-                ?>
+                    <td> 
+                        <input id="corrigerFHF" name="corrigerFHF" type="submit" value="Corriger" class="btn btn-success"/>
+                        <input id="supprimerFHF" name="supprimerFHF" type="submit" value="Supprimer" class="btn btn-danger"/>
+                        <input id="reporterFHF" style="background-color: orange" name="reporterFHF" type="submit" value="Reporter" class="btn btn-success"/>
+                    </td>
+                </form>
+                </tr>
+                <?php
+            }
+            ?>
             </tbody>  
         </table>
     </div>
-</div>
+</div>  
+<form action="index.php?uc=validerFrais&action=validerFicheFrais" 
+      method="post" role="form">
+    <input name="lstMois" type="hidden" id="lstMois" class="form-control" value="<?php echo $moisASelectionner ?>">
+    <input name="lstVisiteur" type="hidden" id="lstVisiteur" class="form-control" value="<?php echo $visiteurASelectionner ?>">
+    <div class ="row">
+        <label for="idFrais">Nombre de justificatifs </label>
+        <input  id="idFrais" 
+                name="libelle"
+                size="10" maxlength="30" 
+                value="<?php echo $nbJustificatifs ?>" 
+                class="form-control"><br>
+        <button class="btn btn-success" type="submit">Valider</button>
+        <button class="btn btn-danger" type="reset">Réinitialiser</button>
+    </div>
+</form>
